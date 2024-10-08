@@ -1,25 +1,46 @@
 #include <iostream>
+//If repeated elements are there, binary search will return the index of first occurence.
 
 int binarysearch(int* arr, int target, int len)
 {
 	int low = 0;
 	int high = len - 1;
 	
+	bool isAsc = false;
+	if(arr[high] > arr[low])
+		isAsc = true;
+	
 	while(low <= high)
 	{
 		//int mid = (low+high)/2;
 		int mid = low + (high - low)/2;
+		
 		if(target == arr[mid])
 		{
 			return mid;
 		}
-		else if(target > arr[mid])
+		
+		if(isAsc == true)
 		{
-			low = mid + 1;
+			if(target > arr[mid])
+			{
+				low = mid + 1;
+			}
+			else
+			{
+				high = mid - 1;
+			}
 		}
 		else
 		{
-			high = mid - 1;
+			if(target < arr[mid])
+			{
+				low = mid + 1;
+			}
+			else
+			{
+				high = mid - 1;
+			}
 		}
 		
 	}
@@ -29,7 +50,8 @@ int binarysearch(int* arr, int target, int len)
 
 int main()
 {
-	int arr[] = {1,3,7,9,10,1,13,14,1};
+	//int arr[] = {1,3,7,9,10,13,14};
+	int arr[] = {4,-1,-3,-10,-11};
 	
 	//int target = 1;
 	
